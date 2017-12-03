@@ -20,9 +20,13 @@
                                 <p>published: {{ post.published_date }}</p>
                             </div>
                             <h1><a href="">{{ post.title }}</a></h1>
+                            <p><h3>하나님 나라 읽기 Lectio</h3></p>
                             <p>{{ post.lectio|linebreaksbr }}</p>
+                            <p><h3>하나님 나라 묵상하기 Meditatio</h3></p>
                             <p>{{ post.meditatio|linebreaksbr }}</p>
+                            <p><h3>하나님 나라 구하기 Oratio</h3></p>
                             <p>{{ post.oratio|linebreaksbr }}</p>
+                            <p><h3>하나님 나라 살기 Oratio</h3></p>
                             <p>{{ post.contemplatio|linebreaksbr }}</p>
                         </div>
                     {% endfor %}
