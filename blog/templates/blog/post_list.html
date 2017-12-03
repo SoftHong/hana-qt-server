@@ -20,7 +20,10 @@
                                 <p>published: {{ post.published_date }}</p>
                             </div>
                             <h1><a href="">{{ post.title }}</a></h1>
-                            <p>{{ post.text|linebreaksbr }}</p>
+                            <p>{{ post.lectio|linebreaksbr }}</p>
+                            <p>{{ post.meditatio|linebreaksbr }}</p>
+                            <p>{{ post.oratio|linebreaksbr }}</p>
+                            <p>{{ post.contemplatio|linebreaksbr }}</p>
                         </div>
                     {% endfor %}
                 </div>
