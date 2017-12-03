@@ -15,8 +15,17 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from blog.views import blog_page, blog_api
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('blog.urls')),
+    url(r'^rest-api/', include('rest_framework.urls')),
+    url(r'^rest-swagger/', include('rest_framework_swagger.urls')),
+
+    # blog
+    url(r'^blog/', blog_page),
+
+    # rest
+    url(r'^api/blog/', blog_api.as_view()),
 ]

@@ -38,6 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    
+    # REST framework
+    'rest_framework',
+
+    # REST framework Swagger
+    'rest_framework_swagger',
 ]
 
 MIDDLEWARE = [
