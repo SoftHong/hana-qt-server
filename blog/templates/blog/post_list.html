@@ -8,9 +8,8 @@
 	</head>
 	<body>
 		<div class="page-header">
-			<h1><a href="/">하나님 나라 QT</a></h1>
+			<h1><a href="/">시음</a></h1>
 		</div>
-
         <div class="content container">
             <div class="row">
                 <div class="col-md-8">
@@ -19,20 +18,18 @@
                             <div class="date">
                                 <p>published: {{ post.published_date }}</p>
                             </div>
-                            <h1><a href="">{{ post.title }}</a></h1>
-                            <p><h3>하나님 나라 읽기 Lectio</h3></p>
-                            <p>{{ post.lectio|linebreaksbr }}</p>
-                            <p><h3>하나님 나라 묵상하기 Meditatio</h3></p>
-                            <p>{{ post.meditatio|linebreaksbr }}</p>
-                            <p><h3>하나님 나라 구하기 Oratio</h3></p>
-                            <p>{{ post.oratio|linebreaksbr }}</p>
-                            <p><h3>하나님 나라 살기 Oratio</h3></p>
-                            <p>{{ post.contemplatio|linebreaksbr }}</p>
+                            <p>{{ post.contents|linebreaksbr }}</p>
+														<h3><a href="">{{ post.title }}</a></h3>
+														<p>{{ post.question|linebreaksbr }}</p>
+														<p>{{ post.profile_link|linebreaksbr }}</p>
+														<p>{{ post.external_author|linebreaksbr }}</p>
+														<p>{{ post.book|linebreaksbr }}</p>
+														<p>{{ post.publisher|linebreaksbr }}</p>
+														<p>{{ post.published_date|linebreaksbr }}</p>
                         </div>
                     {% endfor %}
                 </div>
             </div>
         </div>
-
 	</body>
 </html>
