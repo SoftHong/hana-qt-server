@@ -19,7 +19,7 @@ class PostSerializer(serializers.ModelSerializer):
 		model = Post
 		fields = '__all__'
 
-class blog_api(GenericAPIView, mixins.ListModelMixin):
+class today_api(GenericAPIView, mixins.ListModelMixin):
 
 	def filter_by_date(date):
 		return Post.objects.filter(reservation_date__year=date.year,
