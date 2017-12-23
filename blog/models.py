@@ -2,14 +2,16 @@ from django.db import models
 from django.utils import timezone
 
 class Post(models.Model):
+    reservation_date = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
-    lectio = models.TextField()
-    meditatio = models.TextField()
-    oratio = models.TextField()
-    contemplatio = models.TextField()
-    created_date = models.DateTimeField(default=timezone.now)
-    published_date = models.DateTimeField(blank=True, null=True)
+    contents = models.TextField()
+    question = models.TextField()
+    profile_link = models.CharField(max_length=200, blank=True)
+    external_author = models.CharField(max_length=20, blank=True)
+    book = models.CharField(max_length=100, blank=True)
+    publisher = models.CharField(max_length=100, blank=True)
+    published_date = models.DateTimeField(null=True, blank=True)
 
     def publish(self):
         self.published_date = timezone.now()

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.utils import timezone
+from datetime import datetime, date
 from .models import Post
 from django.http.response import HttpResponse
 from rest_framework import serializers, mixins
@@ -19,7 +20,16 @@ class PostSerializer(serializers.ModelSerializer):
 		fields = '__all__'
 
 class blog_api(GenericAPIView, mixins.ListModelMixin):
-	queryset = Post.objects.all()
+
+	def filter_by_date(date):
+		return Post.objects.filter(reservation_date__year=date.year,
+							reservation_date__month=date.month,
+							reservation_date__day=date.day)
+    
+	# queryset = Post.objects.all()
+	# queryset = Post.objects.filter(reservation_date__lte=timezone.now()).order_by('reservation_date')
+	today = date.today()
+	queryset = filter_by_date(today)
 	serializer_class = PostSerializer
 
 	def get(self, request, *args, **kwargs):

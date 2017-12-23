@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Post, Comment
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['author', 'title', 'published_date', ]
+    list_display = ['reservation_date', 'author', 'title', 'external_author', ]
     list_display_links = ['title']
 
 class CommentAdmin(admin.ModelAdmin):
