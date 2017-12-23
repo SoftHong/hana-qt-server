@@ -6,6 +6,8 @@ from django.http.response import HttpResponse
 from rest_framework import serializers, mixins
 from rest_framework.generics import GenericAPIView
 
+from django.contrib.auth.models import User
+
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     return render(request, 'blog/post_list.html', {'posts': posts})
@@ -16,22 +18,34 @@ def blog_page(request):
 
 class PostSerializer(serializers.ModelSerializer):
 		authorName = serializers.SerializerMethodField('get_user_full_name')
+		introduction = serializers.SerializerMethodField('get_user_introduction')
+		link = serializers.SerializerMethodField('get_user_link')
+
+		class Meta:
+			model = Post
+			fields = ('id', 'reservation_date', 'author', 'authorName', 'title', 'contents', 'question', 'introduction', 'link', 'external_author', 'book', 'publisher', 'published_date' )
+			# fields = '__all__'
 
 		def get_user_full_name(self, obj):
 			request = self.context['request']
 			user = request.user
 			name = ""
 			if user.last_name != "":
-    				name = user.last_name
+				name = user.last_name
 
 			if user.first_name != "":
-    				name = name + user.first_name
+				name = name + user.first_name
 			return name
 
-		class Meta:
-			model = Post
-			fields = ('id', 'reservation_date', 'author', 'authorName', 'title', 'contents', 'question', 'profile_link', 'external_author', 'book', 'publisher', 'published_date' )
-			# fields = '__all__'
+		def get_user_introduction(self, obj):
+			request = self.context['request']
+			profile = request.user.profile
+			return profile.introduction
+		
+		def get_user_link(self, obj):
+			request = self.context['request']
+			profile = request.user.profile
+			return profile.link
 
 
 class today_api(GenericAPIView, mixins.ListModelMixin):
