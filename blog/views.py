@@ -15,9 +15,24 @@ def blog_page(request):
 	return HttpResponse('Hello!' + post_list[0].title)
 
 class PostSerializer(serializers.ModelSerializer):
-	class Meta:
-		model = Post
-		fields = '__all__'
+		authorName = serializers.SerializerMethodField('get_user_full_name')
+
+		def get_user_full_name(self, obj):
+			request = self.context['request']
+			user = request.user
+			name = ""
+			if user.last_name != "":
+    				name = user.last_name
+
+			if user.first_name != "":
+    				name = name + user.first_name
+			return name
+
+		class Meta:
+			model = Post
+			fields = ('id', 'reservation_date', 'author', 'authorName', 'title', 'contents', 'question', 'profile_link', 'external_author', 'book', 'publisher', 'published_date' )
+			# fields = '__all__'
+
 
 class today_api(GenericAPIView, mixins.ListModelMixin):
 
@@ -25,7 +40,6 @@ class today_api(GenericAPIView, mixins.ListModelMixin):
 		return Post.objects.filter(reservation_date__year=date.year,
 							reservation_date__month=date.month,
 							reservation_date__day=date.day)
-    
 	# queryset = Post.objects.all()
 	# queryset = Post.objects.filter(reservation_date__lte=timezone.now()).order_by('reservation_date')
 	today = date.today()
@@ -34,3 +48,4 @@ class today_api(GenericAPIView, mixins.ListModelMixin):
 
 	def get(self, request, *args, **kwargs):
 		return self.list(request, *args, **kwargs)
+
