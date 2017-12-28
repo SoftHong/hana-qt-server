@@ -18,9 +18,9 @@
                             <div class="date">
                                 <p>published: {{ post.reservation_date }}</p>
                             </div>
-                            <p>{{ post.contents|linebreaksbr }}</p>
-                                <p>{{ post.title }}</p>
-                                <p>{{ post.question|linebreaksbr }}</p>
+                                <p>{{ post.contents|linebreaksbr }}</p>
+                                <p>{{ post.title }} / {{post.author}}</p>
+                                <p>"{{ post.question|linebreaksbr }}"</p>
                                 <p>{{ post.profile_link|linebreaksbr }}</p>
                         </div>
                     {% endfor %}
