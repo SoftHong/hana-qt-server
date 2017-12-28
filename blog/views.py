@@ -9,7 +9,7 @@ from rest_framework.generics import GenericAPIView
 from django.contrib.auth.models import User
 
 def post_list(request):
-    posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    posts = Post.objects.order_by('published_date')
     return render(request, 'blog/post_list.html', {'posts': posts})
 
 def blog_page(request):
