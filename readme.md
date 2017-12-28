@@ -26,3 +26,7 @@ git clone https://github.com/letsencrypt/letsencrypt
 cd letsencrypt
 ./letsencrypt-auto certonly
 ```
+
+## Custom profile model
+https://simpleisbetterthancomplex.com/tutorial/2016/11/23/how-to-add-user-profile-to-django-admin.html
+http://deathofagremmie.com/2014/05/24/retiring-get-profile-and-auth-profile-module/

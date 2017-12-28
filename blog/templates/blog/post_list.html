@@ -1,7 +1,7 @@
 {% load staticfiles %}
 <html>
 	<head>
-		<title>하나님 나라 QT</title>
+		<title>시음</title>
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="{% static 'css/blog.css' %}">
@@ -16,16 +16,12 @@
                     {% for post in posts %}
                         <div class="post">
                             <div class="date">
-                                <p>published: {{ post.published_date }}</p>
+                                <p>published: {{ post.reservation_date }}</p>
                             </div>
                             <p>{{ post.contents|linebreaksbr }}</p>
-														<h3><a href="">{{ post.title }}</a></h3>
-														<p>{{ post.question|linebreaksbr }}</p>
-														<p>{{ post.profile_link|linebreaksbr }}</p>
-														<p>{{ post.external_author|linebreaksbr }}</p>
-														<p>{{ post.book|linebreaksbr }}</p>
-														<p>{{ post.publisher|linebreaksbr }}</p>
-														<p>{{ post.published_date|linebreaksbr }}</p>
+                                <p>{{ post.title }}</p>
+                                <p>{{ post.question|linebreaksbr }}</p>
+                                <p>{{ post.profile_link|linebreaksbr }}</p>
                         </div>
                     {% endfor %}
                 </div>
