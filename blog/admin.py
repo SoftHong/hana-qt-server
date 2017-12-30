@@ -22,6 +22,10 @@ class PostAdmin(admin.ModelAdmin):
     list_display = ['reservation_date', 'author', 'title', ]
     list_display_links = ['title']
 
+    def save_model(self, request, obj, form, change):
+        obj.author = request.user
+        obj.save()
+
 class CommentAdmin(admin.ModelAdmin):
     list_display = ['post', 'author', 'message']
     list_display_links = ['message']

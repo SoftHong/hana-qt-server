@@ -27,7 +27,7 @@ class PostSerializer(serializers.ModelSerializer):
 
 		class Meta:
 			model = Post
-			fields = ('id', 'reservation_date', 'author', 'authorName', 'title', 'contents', 'question', 'introduction', 'link', 'book', 'publisher', 'published_date' )
+			fields = ('id', 'reservation_date', 'authorName', 'title', 'contents', 'question', 'introduction', 'link', 'book', 'publisher', 'published_date' )
 			# fields = '__all__'
 
 		# def get_user_full_name(self, obj):
