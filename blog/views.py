@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.utils import timezone
 from datetime import datetime, date
-from .models import Post
+from .models import Post, Profile
 from django.http.response import HttpResponse
 from rest_framework import serializers, mixins
 from rest_framework.generics import GenericAPIView
@@ -9,7 +9,7 @@ from rest_framework.generics import GenericAPIView
 from django.contrib.auth.models import User
 
 def post_list(request):
-    posts = Post.objects.order_by('published_date')
+    posts = Post.objects.order_by('reservation_date')
     return render(request, 'blog/post_list.html', {'posts': posts})
 
 def blog_page(request):
@@ -17,35 +17,39 @@ def blog_page(request):
 	return HttpResponse('Hello!' + post_list[0].title)
 
 class PostSerializer(serializers.ModelSerializer):
-		authorName = serializers.SerializerMethodField('get_user_full_name')
-		introduction = serializers.SerializerMethodField('get_user_introduction')
-		link = serializers.SerializerMethodField('get_user_link')
+		# authorName = serializers.SerializerMethodField('get_user_full_name')
+		authorName = serializers.CharField(source='get_user_full_name')
+		introduction = serializers.CharField(source='get_user_introduction')
+		link = serializers.CharField(source='get_user_link')
+
+		# introduction = serializers.SerializerMethodField('get_user_introduction')
+		# link = serializers.SerializerMethodField('get_user_link')
 
 		class Meta:
 			model = Post
-			fields = ('id', 'reservation_date', 'author', 'authorName', 'title', 'contents', 'question', 'introduction', 'link', 'external_author', 'book', 'publisher', 'published_date' )
+			fields = ('id', 'reservation_date', 'author', 'authorName', 'title', 'contents', 'question', 'introduction', 'link', 'book', 'publisher', 'published_date' )
 			# fields = '__all__'
 
-		def get_user_full_name(self, obj):
-			request = self.context['request']
-			user = request.user
-			name = ""
-			if user.last_name != "":
-				name = user.last_name
+		# def get_user_full_name(self, obj):
+		# 	request = self.context['request']
+		# 	user = request.user
+		# 	name = ""
+		# 	if user.last_name != "":
+		# 		name = user.last_name
 
-			if user.first_name != "":
-				name = name + user.first_name
-			return name
+		# 	if user.first_name != "":
+		# 		name = name + user.first_name
+		# 	return name
 
-		def get_user_introduction(self, obj):
-			request = self.context['request']
-			profile = request.user.profile
-			return profile.introduction
+		# def get_user_introduction(self, obj):
+		# 	request = self.context['request']
+		# 	profile = request.user.profile
+		# 	return profile.introduction
 		
-		def get_user_link(self, obj):
-			request = self.context['request']
-			profile = request.user.profile
-			return profile.link
+		# def get_user_link(self, obj):
+		# 	request = self.context['request']
+		# 	profile = request.user.profile
+		# 	return profile.link
 
 
 class today_api(GenericAPIView, mixins.ListModelMixin):
@@ -56,6 +60,7 @@ class today_api(GenericAPIView, mixins.ListModelMixin):
 							reservation_date__day=date.day)
 	# queryset = Post.objects.all()
 	# queryset = Post.objects.filter(reservation_date__lte=timezone.now()).order_by('reservation_date')
+
 	today = date.today()
 	queryset = filter_by_date(today)
 	serializer_class = PostSerializer

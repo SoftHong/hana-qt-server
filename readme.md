@@ -7,6 +7,13 @@ source myvenv/bin/activate
 deactivate
 ```
 
+## 설치
+```
+pip install django
+pip install django-rest-framework
+pip install django-rest-swagger
+```
+
 ## 서버 실행
 ```
 python manage.py runserver

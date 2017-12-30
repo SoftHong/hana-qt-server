@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('blog.urls')),
     url(r'^rest-api/', include('rest_framework.urls')),
-    url(r'^rest-swagger/', include('rest_framework_swagger.urls')),
+#    url(r'^rest-swagger/', include('rest_framework_swagger.urls')),
 
     # blog
     url(r'^blog/', blog_page),
