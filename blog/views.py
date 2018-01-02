@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.utils import timezone
-from datetime import datetime, date
+from datetime import datetime, timedelta, time
 from .models import Post, Profile
 from django.http.response import HttpResponse
 from rest_framework import serializers, mixins
@@ -53,16 +53,17 @@ class PostSerializer(serializers.ModelSerializer):
 
 
 class today_api(GenericAPIView, mixins.ListModelMixin):
-
-	def filter_by_date(date):
-		return Post.objects.filter(reservation_date__year=date.year,
-							reservation_date__month=date.month,
-							reservation_date__day=date.day)
 	# queryset = Post.objects.all()
 	# queryset = Post.objects.filter(reservation_date__lte=timezone.now()).order_by('reservation_date')
 
-	today = date.today()
-	queryset = filter_by_date(today)
+	def get_today_post():
+		today = datetime.now().date()
+		tomorrow = today + timedelta(1)
+		today_start = datetime.combine(today, time())
+		today_end = datetime.combine(tomorrow, time())
+		return Post.objects.filter(reservation_date__lte=today_end, reservation_date__gte=today_start)
+
+	queryset = get_today_post()
 	serializer_class = PostSerializer
 
 	def get(self, request, *args, **kwargs):
