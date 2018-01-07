@@ -56,7 +56,10 @@ class today_api(GenericAPIView, mixins.ListModelMixin):
 	# queryset = Post.objects.all()
 	# queryset = Post.objects.filter(reservation_date__lte=timezone.now()).order_by('reservation_date')
 
-	queryset = Post.objects.filter(reservation_date__date=date.today()).order_by('reservation_date')
+	# queryset = Post.objects.filter(reservation_date__date=date.today()).order_by('reservation_date')
+
+	today = date.today()
+	queryset = Post.objects.filter(reservation_date__year=today.year, reservation_date__month=today.month, reservation_date__day=today.day)
 	serializer_class = PostSerializer
 
 	def get(self, request, *args, **kwargs):
