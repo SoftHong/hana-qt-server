@@ -20,7 +20,7 @@ class PostSerializer(serializers.ModelSerializer):
 		# authorName = serializers.SerializerMethodField('get_user_full_name')
 		authorName = serializers.CharField(source='get_user_full_name')
 		introduction = serializers.CharField(source='get_user_introduction')
-		profile_link = serializers.CharField(source='get_user_link')
+		link = serializers.CharField(source='get_user_link')
 		profile_image_link = serializers.CharField(source='get_user_image_link')
 		# introduction = serializers.SerializerMethodField('get_user_introduction')
 		# link = serializers.SerializerMethodField('get_user_link')
