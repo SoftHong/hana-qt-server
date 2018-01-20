@@ -20,14 +20,14 @@ class PostSerializer(serializers.ModelSerializer):
 		# authorName = serializers.SerializerMethodField('get_user_full_name')
 		authorName = serializers.CharField(source='get_user_full_name')
 		introduction = serializers.CharField(source='get_user_introduction')
-		link = serializers.CharField(source='get_user_link')
-		image_link = serializers.CharField(source='get_user_image_link')
+		profile_link = serializers.CharField(source='get_user_link')
+		profile_image_link = serializers.CharField(source='get_user_image_link')
 		# introduction = serializers.SerializerMethodField('get_user_introduction')
 		# link = serializers.SerializerMethodField('get_user_link')
 
 		class Meta:
 			model = Post
-			fields = ('id', 'reservation_date', 'authorName', 'title', 'contents', 'question', 'introduction', 'link', 'image_link','book', 'publisher', 'published_date' )
+			fields = ('id', 'reservation_date', 'authorName', 'title', 'contents', 'question', 'introduction', 'link', 'profile_image_link', 'book', 'publisher', 'published_date' )
 			# fields = '__all__'
 
 		# def get_user_full_name(self, obj):
