@@ -8,6 +8,7 @@ from django.dispatch import receiver
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     link = models.CharField(max_length=200, blank=True)
+    image_link = models.CharField(max_length=200, blank=True)
     introduction = models.TextField()
 
     def __str__(self):
@@ -22,6 +23,7 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
 class ExternalProfile(models.Model):
     author = models.CharField(max_length=20)
     link = models.CharField(max_length=200, blank=True)
+    image_link = models.CharField(max_length=200, blank=True)
     introduction = models.TextField()
 
     def __str__(self):
@@ -66,6 +68,12 @@ class Post(models.Model):
         if self.external_profile:
             link = ExternalProfile.objects.get(author=self.external_profile).link
         return link
+
+    def get_user_image_link(self):
+        image_link = Profile.objects.get(user=self.author).image_link
+        if self.external_profile:
+            image_link = ExternalProfile.objects.get(author=self.external_profile).image_link
+        return image_link
 
 class Comment(models.Model):
     post = models.ForeignKey(Post)
