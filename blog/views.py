@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.utils import timezone
 from datetime import date
-from tzlocal import get_localzone # pip install tzlocal
 from .models import Post, Profile
 from django.http.response import HttpResponse
 from rest_framework import serializers, mixins
@@ -29,9 +28,7 @@ class PostSerializer(serializers.ModelSerializer):
 
 
 class today_api(GenericAPIView, mixins.ListModelMixin):
-	local_tz = get_localzone()
-	timezone.activate(local_tz)
-	today = timezone.localtime(timezone.now())
+	today = timezone.now()
 	queryset = Post.objects.filter(reservation_date__year=today.year, reservation_date__month=today.month, reservation_date__day=today.day)
 	serializer_class = PostSerializer
 
