@@ -26,7 +26,6 @@ class PostSerializer(serializers.ModelSerializer):
 			model = Post
 			fields = ('id', 'reservation_date', 'authorName', 'title', 'contents', 'question', 'introduction', 'link', 'profile_image_link', 'book', 'publisher', 'published_date' )
 
-
 class today_api(GenericAPIView, mixins.ListModelMixin):
 	today = timezone.now()
 	queryset = Post.objects.filter(reservation_date__year=today.year, reservation_date__month=today.month, reservation_date__day=today.day)
