@@ -10,7 +10,7 @@ class Profile(models.Model):
     link = models.CharField(max_length=200, blank=True)
     image_link = models.CharField(max_length=200, blank=True)
     introduction = models.TextField()
-    day = models.DecimalField(max_digits=7, decimal_places=0, default=0)
+    day = models.DecimalField(max_digits=7, decimal_places=0, blank=True)
 
     def __str__(self):
         return self.user.username
