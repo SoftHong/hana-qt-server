@@ -20,17 +20,24 @@ def blog_page(request):
 	return HttpResponse('Hello!' + post_list[0].title)
 
 class PostSerializer(serializers.ModelSerializer):
-		authorName = serializers.CharField(source='get_user_full_name')
-		introduction = serializers.CharField(source='get_user_introduction')
-		link = serializers.CharField(source='get_user_link')
-		profile_image_link = serializers.CharField(source='get_user_image_link')
+	authorName = serializers.CharField(source='get_user_full_name')
+	introduction = serializers.CharField(source='get_user_introduction')
+	link = serializers.CharField(source='get_user_link')
+	profile_image_link = serializers.CharField(source='get_user_image_link')
 
-		class Meta:
-			model = Post
-			fields = ('id', 'reservation_date', 'authorName', 'title', 'contents', 'question', 'introduction', 'link', 'profile_image_link', 'book', 'publisher', 'published_date' )
+	class Meta:
+		model = Post
+		fields = ('id', 'reservation_date', 'authorName', 'title', 'contents', 'question', 'introduction', 'link', 'profile_image_link', 'book', 'publisher', 'published_date' )
+
+
+class PoetSerializer(serializers.ModelSerializer):
+	author_name = serializers.CharField(source='get_user_full_name')
+
+	class Meta:
+		model = Profile
+		fields = '__all__'
 
 class today_api(GenericAPIView, mixins.ListModelMixin):
-    
 	os.environ["TZ"] = "Asia/Seoul"
 	time.tzset()
 
@@ -44,3 +51,9 @@ class today_api(GenericAPIView, mixins.ListModelMixin):
 	def get(self, request, *args, **kwargs):
 		return self.list(request, *args, **kwargs)
 
+class poet_api(GenericAPIView, mixins.ListModelMixin):
+	queryset = Profile.objects.all()
+	serializer_class = PoetSerializer
+
+	def get(self, request, *args, **kwargs):
+		return self.list(request, *args, **kwargs)

@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from blog.views import blog_page, today_api
+from blog.views import blog_page, today_api, poet_api
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -28,4 +28,6 @@ urlpatterns = [
 
     # rest
     url(r'^api/today/', today_api.as_view()),
+    url(r'^api/poet/', poet_api.as_view()),
+
 ]
