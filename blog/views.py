@@ -32,6 +32,7 @@ class PostSerializer(serializers.ModelSerializer):
 
 class PoetSerializer(serializers.ModelSerializer):
 	author_name = serializers.CharField(source='get_user_full_name')
+	user_name = serializers.CharField(source='get_user_name')
 
 	class Meta:
 		model = Profile

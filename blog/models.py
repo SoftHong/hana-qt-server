@@ -21,6 +21,9 @@ class Profile(models.Model):
         if self.user.first_name != "":
             fullName += self.user.first_name
         return fullName
+    
+    def get_user_name(self):
+        return self.user.name
 
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
