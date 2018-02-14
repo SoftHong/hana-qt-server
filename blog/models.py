@@ -20,7 +20,7 @@ class Profile(models.Model):
         (6, '일요일'),
         (7, '해당없음')
     )
-    day = models.CharField(max_length=1, choices=DAY_CHOICES, default=7)
+    day = models.DecimalField(max_digits=7, decimal_places=0, choices=DAY_CHOICES, default=7)
 
     def __str__(self):
         return self.user.username
