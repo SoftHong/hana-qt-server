@@ -10,7 +10,17 @@ class Profile(models.Model):
     link = models.CharField(max_length=200, blank=True)
     image_link = models.CharField(max_length=200, blank=True)
     introduction = models.TextField()
-    day = models.DecimalField(max_digits=7, decimal_places=0, blank=True)
+    DAY_CHOICES = (
+        (1, '월'),
+        (2, '화'),
+        (3, '수'),
+        (4, '목'),
+        (5, '금'),
+        (6, '토'),
+        (7, '일'),
+        (8, '해당없음')
+    )
+    day = models.CharField(max_length=1, choices=DAY_CHOICES, default=8)
 
     def __str__(self):
         return self.user.username
