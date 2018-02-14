@@ -11,16 +11,16 @@ class Profile(models.Model):
     image_link = models.CharField(max_length=200, blank=True)
     introduction = models.TextField()
     DAY_CHOICES = (
-        (1, '월'),
-        (2, '화'),
-        (3, '수'),
-        (4, '목'),
-        (5, '금'),
-        (6, '토'),
-        (7, '일'),
-        (8, '해당없음')
+        (0, '월요일'),
+        (1, '화요일'),
+        (2, '수요일'),
+        (3, '목요일'),
+        (4, '금요일'),
+        (5, '토요일'),
+        (6, '일요일'),
+        (7, '해당없음')
     )
-    day = models.CharField(max_length=1, choices=DAY_CHOICES, default=8)
+    day = models.CharField(max_length=1, choices=DAY_CHOICES, default=7)
 
     def __str__(self):
         return self.user.username
