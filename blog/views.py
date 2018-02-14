@@ -29,7 +29,6 @@ class PostSerializer(serializers.ModelSerializer):
 		model = Post
 		fields = ('id', 'reservation_date', 'authorName', 'title', 'contents', 'question', 'introduction', 'link', 'profile_image_link', 'book', 'publisher', 'published_date' )
 
-
 class PoetSerializer(serializers.ModelSerializer):
 	author_name = serializers.CharField(source='get_user_full_name')
 	user_name = serializers.CharField(source='get_user_name')
