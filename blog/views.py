@@ -52,7 +52,7 @@ class today_api(GenericAPIView, mixins.ListModelMixin):
 		return self.list(request, *args, **kwargs)
 
 class poet_api(GenericAPIView, mixins.ListModelMixin):
-	queryset = Profile.objects.filter(user__groups__name__in=['시인'])
+	queryset = Profile.objects.filter(user__groups__name__in=['시인']).order_by('day')
 	serializer_class = PoetSerializer
 
 	def get(self, request, *args, **kwargs):
