@@ -23,7 +23,7 @@ class Profile(models.Model):
         return fullName
     
     def get_user_name(self):
-        return self.user.name
+        return self.user.username
 
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
