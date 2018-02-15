@@ -33,7 +33,7 @@ class Profile(models.Model):
             fullName += self.user.first_name
         return fullName
     
-    def get_user_name(self):
+    def get_user_id(self):
         return self.user.username
 
 @receiver(post_save, sender=User)
@@ -96,6 +96,9 @@ class Post(models.Model):
         if self.external_profile:
             image_link = ExternalProfile.objects.get(author=self.external_profile).image_link
         return image_link
+    
+    def get_user_id(self):
+        return self.author.username
 
 class Comment(models.Model):
     post = models.ForeignKey(Post)
