@@ -38,8 +38,12 @@ class PoetSerializer(serializers.ModelSerializer):
 		fields = '__all__'
 
 class today_api(GenericAPIView, mixins.ListModelMixin):
-	today = timezone.localtime(timezone.now()).date()	
-	queryset = Post.objects.filter(reservation_date__year=today.year, reservation_date__month=today.month, reservation_date__day=today.day)
+	# today = timezone.localtime(timezone.now()).date()	
+	# queryset = Post.objects.filter(reservation_date__year=today.year, reservation_date__month=today.month, reservation_date__day=today.day)
+
+	today_min = datetime.datetime.combine(datetime.date.today(), datetime.time.min)
+	today_max = datetime.datetime.combine(datetime.date.today(), datetime.time.max)
+	queryset = Post.objects.filter(reservation_date__range=(today_min, today_max)).order_by('reservation_date')
 	serializer_class = PostSerializer
 
 	def get(self, request, *args, **kwargs):
