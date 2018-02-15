@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.utils import timezone
-import datetime
 from .models import Post, Profile
 from django.http.response import HttpResponse
 from rest_framework import serializers, mixins
@@ -38,18 +37,15 @@ class PoetSerializer(serializers.ModelSerializer):
 		fields = '__all__'
 
 class today_api(GenericAPIView, mixins.ListModelMixin):
-	os.environ["TZ"] = "Asia/Seoul"
-	time.tzset()
-
-	today = datetime.datetime.now()		
-	# queryset = Post.objects.filter(reservation_date__year=today.year, reservation_date__month=today.month, reservation_date__day=today.day)
-	today_min = datetime.datetime.combine(datetime.date.today(), datetime.time.min)
-	today_max = datetime.datetime.combine(datetime.date.today(), datetime.time.max)
-	queryset = Post.objects.filter(reservation_date__range=(today_min, today_max)).order_by('reservation_date')
+	today = timezone.localtime(timezone.now()).date()	
+	queryset = Post.objects.filter(reservation_date__year=today.year, reservation_date__month=today.month, reservation_date__day=today.day)
+	# today_min = datetime.datetime.combine(datetime.date.today(), datetime.time.min)
+	# today_max = datetime.datetime.combine(datetime.date.today(), datetime.time.max)
+	# queryset = Post.objects.filter(reservation_date__range=(today_min, today_max)).order_by('reservation_date')
 	serializer_class = PostSerializer
 
 	def get(self, request, *args, **kwargs):
-		return self.list(request, *args, **kwargs)
+			return self.list(request, *args, **kwargs)
 
 class poet_api(GenericAPIView, mixins.ListModelMixin):
 	queryset = Profile.objects.filter(user__groups__name__in=['시인']).order_by('day')
