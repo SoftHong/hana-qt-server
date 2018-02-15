@@ -62,5 +62,5 @@ class poem_api(GenericAPIView, mixins.ListModelMixin):
 		queryset = Post.objects.all()
 		user_id = self.request.query_params.get('user_id', None)
 		if user_id is not None:
-			queryset = queryset.filter(author__username=user_id)
+			queryset = queryset.filter(author__username=user_id).order_by('-reservation_date')
 		return queryset
