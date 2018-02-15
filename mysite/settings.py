@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
-    
+
     # REST framework
     'rest_framework',
 
@@ -114,9 +114,9 @@ LANGUAGE_CODE = 'ko'
 
 TIME_ZONE = 'Asia/Seoul'
 
-# USE_I18N = True
+USE_I18N = True
 
-# USE_L10N = True
+USE_L10N = True
 
 USE_TZ = True
 
