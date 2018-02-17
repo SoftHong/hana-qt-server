@@ -30,5 +30,5 @@ urlpatterns = [
     url(r'^api/today/', today_api.as_view()),
     url(r'^api/poet/', poet_api.as_view()),
     url(r'^api/poem/(?:title-(?P<title>\d+)/)?$', poem_api.as_view()),
-    url(r'^api/today/test/', today_api_test.as_view()),
+    url(r'^api/test/', today_api_test.as_view()),
 ]
