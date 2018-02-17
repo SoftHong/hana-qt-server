@@ -74,7 +74,7 @@ class poem_api(GenericAPIView, mixins.ListModelMixin):
 
 class today_api_test(GenericAPIView, mixins.ListModelMixin):
 	today = timezone.now()	
-	queryset = Post.objects.filter(reservation_date__gte=today)
+	queryset = Post.objects.filter(reservation_date__gte=today).order_by('reservation_date')
 	serializer_class = PostSerializer
 
 	def get(self, request, *args, **kwargs):
