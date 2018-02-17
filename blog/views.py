@@ -39,7 +39,8 @@ class PoetSerializer(serializers.ModelSerializer):
 		fields = '__all__'
 
 class today_api(GenericAPIView, mixins.ListModelMixin):
-	today = timezone.now()	
+	# today = timezone.now()	
+	today = timezone.localtime(timezone.now())
 	queryset = Post.objects.filter(reservation_date__year=today.year, reservation_date__month=today.month, reservation_date__day=today.day)
 
 	# today_min = datetime.datetime.combine(datetime.date.today(), datetime.time.min)
