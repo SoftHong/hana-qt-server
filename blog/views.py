@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.utils import timezone
 from datetime import datetime
 from .models import Post, Profile
+from django.utils.dateparse import parse_date
 from django.http.response import HttpResponse
 from rest_framework import serializers, mixins
 from rest_framework.generics import GenericAPIView
@@ -74,7 +75,9 @@ class poem_api(GenericAPIView, mixins.ListModelMixin):
 		if user_id is not None:
 			queryset = queryset.filter(author__username=user_id)
 		if reservation_date is not None:
-			queryset = queryset.filter(reservation_date=reservation_date)
+			reservation_parsed_date = parse_date(reservation_date)
+			queryset = 	queryset.filter(reservation_date__year=reservation_parsed_date.year, reservation_date__month=reservation_parsed_date.month, reservation_date__day=reservation_parsed_date.day)
+
 		return queryset.order_by('-reservation_date')
 
 
