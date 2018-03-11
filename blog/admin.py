@@ -27,7 +27,7 @@ class PostAdmin(admin.ModelAdmin):
         obj.save()
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ['post', 'author', 'message']
+    list_display = ['post', 'author', 'message', ]
     list_display_links = ['message']
 
 class ExternalProfileAdmin(admin.ModelAdmin):

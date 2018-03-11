@@ -12,6 +12,7 @@ deactivate
 pip install django
 pip install django-rest-framework
 pip install django-rest-swagger
+pip install --user djangorestframework
 ```
 
 ## 서버 실행
