@@ -8,7 +8,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE,)
     link = models.CharField(max_length=200, blank=True)
     image_link = models.CharField(max_length=200, blank=True)
     introduction = models.TextField()
@@ -103,7 +103,7 @@ class Post(models.Model):
         return self.author.username
 
 class Comment(models.Model):
-    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE,)
     author = models.CharField(max_length=20)
     message = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
