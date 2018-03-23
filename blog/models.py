@@ -55,7 +55,7 @@ class ExternalProfile(models.Model):
 
 class Post(models.Model):
     reservation_date = models.DateTimeField(default=timezone.now)
-    author = models.ForeignKey('auth.User')
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     contents = models.TextField()
     question = models.TextField()
@@ -103,7 +103,7 @@ class Post(models.Model):
         return self.author.username
 
 class Comment(models.Model):
-    post = models.ForeignKey(Post)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
     author = models.CharField(max_length=20)
     message = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
